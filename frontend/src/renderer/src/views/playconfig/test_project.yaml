@@ -1,0 +1,155 @@
+openapi: 3.0.0
+info:
+  title: 测试项目管理 API
+  version: 1.0.0
+  description: 用于管理测试项目的 API 接口定义
+
+servers:
+  - url: http://localhost:8000/api
+    description: 开发服务器
+
+paths:
+  /test_project/get_test_project_list:
+    post:
+      summary: 获取测试项目列表
+      description: 根据搜索条件获取测试项目列表
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 项目名称（可选）
+      responses:
+        '200':
+          description: 成功返回测试项目列表
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: 项目ID
+                        name:
+                          type: string
+                          description: 项目名称
+                        code:
+                          type: string
+                          description: 项目编号
+                        description:
+                          type: string
+                          description: 项目描述
+                  total:
+                    type: integer
+                    description: 总记录数
+
+  /test_project/create_test_project:
+    post:
+      summary: 创建测试项目
+      description: 创建一个新的测试项目
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 项目名称
+                code:
+                  type: string
+                  description: 项目编号
+                description:
+                  type: string
+                  description: 项目描述
+              required:
+                - name
+                - code
+      responses:
+        '200':
+          description: 成功创建测试项目
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: 成功消息
+
+  /test_project/update_test_project:
+    post:
+      summary: 更新测试项目
+      description: 更新一个已有的测试项目
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: 项目ID
+                name:
+                  type: string
+                  description: 项目名称
+                code:
+                  type: string
+                  description: 项目编号
+                description:
+                  type: string
+                  description: 项目描述
+              required:
+                - id
+                - name
+                - code
+      responses:
+        '200':
+          description: 成功更新测试项目
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: 成功消息
+
+  /test_project/delete_test_project:
+    post:
+      summary: 删除测试项目
+      description: 删除一个已有的测试项目
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: 项目ID
+              required:
+                - id
+      responses:
+        '200':
+          description: 成功删除测试项目
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: 成功消息

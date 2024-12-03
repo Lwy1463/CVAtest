@@ -1,0 +1,211 @@
+openapi: 3.0.0
+info:
+  title: 标签管理 API
+  version: 1.0.0
+  description: 标签管理功能的后端接口定义
+paths:
+  /labels/get_label_list:
+    post:
+      summary: 获取标签列表
+      description: 根据标签组ID和标签名称获取标签列表
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_group_id:
+                  type: string
+                  description: 标签组ID
+                label_name:
+                  type: string
+                  description: 标签名称
+      responses:
+        '200':
+          description: 成功获取标签列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    label_id:
+                      type: string
+                      description: 标签ID
+                    label_name:
+                      type: string
+                      description: 标签名称
+                    label_group_id:
+                      type: string
+                      description: 标签组ID
+                    color:
+                      type: string
+                      description: 标签颜色
+                    creator:
+                      type: string
+                      description: 创建人
+                    created_time:
+                      type: string
+                      format: date-time
+                      description: 创建时间
+  /labels/get_label_group_list:
+    post:
+      summary: 获取标签组列表
+      description: 根据标签组类型获取标签组列表
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_group_type:
+                  type: string
+                  description: 标签组类型（可选值：corpus, project）
+      responses:
+        '200':
+          description: 成功获取标签组列表
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    label_group_id:
+                      type: string
+                      description: 标签组ID
+                    label_group_name:
+                      type: string
+                      description: 标签组名称
+                    label_group_type:
+                      type: string
+                      description: 标签组类型
+  /labels/create_label:
+    post:
+      summary: 创建标签
+      description: 创建一个新的标签
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_name:
+                  type: string
+                  description: 标签名称
+                label_group_id:
+                  type: string
+                  description: 标签组ID
+                color:
+                  type: string
+                  description: 标签颜色
+      responses:
+        '200':
+          description: 标签创建成功
+  /labels/update_label:
+    post:
+      summary: 更新标签
+      description: 更新一个已有的标签
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_id:
+                  type: string
+                  description: 标签ID
+                label_name:
+                  type: string
+                  description: 标签名称
+                label_group_id:
+                  type: string
+                  description: 标签组ID
+                color:
+                  type: string
+                  description: 标签颜色
+      responses:
+        '200':
+          description: 标签更新成功
+  /labels/delete_label:
+    post:
+      summary: 删除标签
+      description: 删除一个标签
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_id:
+                  type: string
+                  description: 标签ID
+      responses:
+        '200':
+          description: 标签删除成功
+  /labels/create_label_group:
+    post:
+      summary: 创建标签组
+      description: 创建一个新的标签组
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_group_name:
+                  type: string
+                  description: 标签组名称
+                label_group_type:
+                  type: string
+                  description: 标签组类型（可选值：corpus, project）
+      responses:
+        '200':
+          description: 标签组创建成功
+  /labels/update_label_group:
+    post:
+      summary: 更新标签组
+      description: 更新一个已有的标签组
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_group_id:
+                  type: string
+                  description: 标签组ID
+                label_group_name:
+                  type: string
+                  description: 标签组名称
+                label_group_type:
+                  type: string
+                  description: 标签组类型（可选值：corpus, project）
+      responses:
+        '200':
+          description: 标签组更新成功
+  /labels/delete_label_group:
+    post:
+      summary: 删除标签组
+      description: 删除一个标签组
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                label_group_id:
+                  type: string
+                  description: 标签组ID
+      responses:
+        '200':
+          description: 标签组删除成功

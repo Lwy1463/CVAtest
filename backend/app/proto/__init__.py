@@ -1,0 +1,1 @@
+from app.proto.synthesize_proto import *
